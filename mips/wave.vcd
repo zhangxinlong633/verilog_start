@@ -1,0 +1,70 @@
+$date
+	Sat Feb 20 23:43:44 2021
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module tbxxxxx $end
+$var wire 1 ! zero $end
+$var wire 32 " out [31:0] $end
+$var reg 32 # a [31:0] $end
+$var reg 32 $ b [31:0] $end
+$var reg 1 % clk $end
+$var reg 4 & ctl [3:0] $end
+$scope module a1 $end
+$var wire 32 ' a [31:0] $end
+$var wire 32 ( b [31:0] $end
+$var wire 1 % clk $end
+$var wire 4 ) ctl [3:0] $end
+$var wire 1 ! zero $end
+$var wire 32 * sub_ab [31:0] $end
+$var wire 1 + slt $end
+$var wire 1 , oflow_sub $end
+$var wire 1 - oflow_add $end
+$var wire 1 . oflow $end
+$var wire 32 / add_ab [31:0] $end
+$var reg 32 0 out [31:0] $end
+$upscope $end
+$scope task test $end
+$var reg 32 1 aa [31:0] $end
+$var reg 32 2 bb [31:0] $end
+$var reg 4 3 cc [3:0] $end
+$var reg 32 4 oo [31:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b1100100 4
+b1010 3
+b1010 2
+b1010 1
+bx 0
+b10100 /
+0.
+0-
+0,
+0+
+b0 *
+b1010 )
+b1010 (
+b1010 '
+b1010 &
+x%
+b1010 $
+b1010 #
+bx "
+x!
+$end
+#5
+0%
+#10
+0!
+b1100100 "
+b1100100 0
+1%
+#15
+0%
