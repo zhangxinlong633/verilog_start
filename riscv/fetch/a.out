@@ -1,0 +1,92 @@
+#! /usr/local/Cellar/icarus-verilog/11.0/bin/vvp
+:ivl_version "11.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "/usr/local/Cellar/icarus-verilog/11.0/lib/ivl/system.vpi";
+:vpi_module "/usr/local/Cellar/icarus-verilog/11.0/lib/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/local/Cellar/icarus-verilog/11.0/lib/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/local/Cellar/icarus-verilog/11.0/lib/ivl/v2005_math.vpi";
+:vpi_module "/usr/local/Cellar/icarus-verilog/11.0/lib/ivl/va_math.vpi";
+S_0x7f9e3a706f90 .scope module, "tb_fetch" "tb_fetch" 2 6;
+ .timescale -12 -12;
+v0x7f9e3a71c530_0 .var "addr", 31 0;
+v0x7f9e3a71c600_0 .var "clk", 0 0;
+v0x7f9e3a71c6b0_0 .net "data", 31 0, L_0x7f9e3a71cac0;  1 drivers
+S_0x7f9e3a707100 .scope module, "a1" "fetch" 2 10, 3 4 0, S_0x7f9e3a706f90;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "clk";
+    .port_info 1 /INPUT 32 "addr";
+    .port_info 2 /OUTPUT 32 "data";
+P_0x7f9e3a70b890 .param/str "IM_DATA" 0 3 6, "im_data.txt";
+P_0x7f9e3a70b8d0 .param/l "NMEM" 0 3 5, +C4<00000000000000000000000010000000>;
+L_0x7f9e3a71cac0 .functor BUFZ 32, L_0x7f9e3a71c780, C4<00000000000000000000000000000000>, C4<00000000000000000000000000000000>, C4<00000000000000000000000000000000>;
+v0x7f9e3a70be30_0 .net *"_ivl_0", 31 0, L_0x7f9e3a71c780;  1 drivers
+v0x7f9e3a71bce0_0 .net *"_ivl_3", 6 0, L_0x7f9e3a71c860;  1 drivers
+v0x7f9e3a71bd80_0 .net *"_ivl_4", 8 0, L_0x7f9e3a71c960;  1 drivers
+L_0x7f9e3b963008 .functor BUFT 1, C4<00>, C4<0>, C4<0>, C4<0>;
+v0x7f9e3a71be10_0 .net *"_ivl_7", 1 0, L_0x7f9e3b963008;  1 drivers
+v0x7f9e3a71bea0_0 .net "addr", 31 0, v0x7f9e3a71c530_0;  1 drivers
+v0x7f9e3a71bf70_0 .net "clk", 0 0, v0x7f9e3a71c600_0;  1 drivers
+v0x7f9e3a71c010_0 .net "data", 31 0, L_0x7f9e3a71cac0;  alias, 1 drivers
+v0x7f9e3a71c0c0 .array "mem", 127 0, 31 0;
+L_0x7f9e3a71c780 .array/port v0x7f9e3a71c0c0, L_0x7f9e3a71c960;
+L_0x7f9e3a71c860 .part v0x7f9e3a71c530_0, 2, 7;
+L_0x7f9e3a71c960 .concat [ 7 2 0 0], L_0x7f9e3a71c860, L_0x7f9e3b963008;
+S_0x7f9e3a71c190 .scope task, "test" "test" 2 26, 2 26 0, S_0x7f9e3a706f90;
+ .timescale -12 -12;
+v0x7f9e3a71c3c0_0 .var "addr_in", 31 0;
+v0x7f9e3a71c480_0 .var "data_out", 31 0;
+E_0x7f9e3a71c360 .event negedge, v0x7f9e3a71bf70_0;
+E_0x7f9e3a71c390 .event posedge, v0x7f9e3a71bf70_0;
+TD_tb_fetch.test ;
+    %load/vec4 v0x7f9e3a71c3c0_0;
+    %store/vec4 v0x7f9e3a71c530_0, 0, 32;
+    %wait E_0x7f9e3a71c390;
+    %wait E_0x7f9e3a71c360;
+    %load/vec4 v0x7f9e3a71c6b0_0;
+    %load/vec4 v0x7f9e3a71c480_0;
+    %cmp/e;
+    %jmp/0xz  T_0.0, 4;
+    %vpi_call 2 34 "$display", "It works." {0 0 0};
+    %jmp T_0.1;
+T_0.0 ;
+    %vpi_call 2 36 "$display", "not works." {0 0 0};
+T_0.1 ;
+    %end;
+    .scope S_0x7f9e3a707100;
+T_1 ;
+    %vpi_call 3 10 "$readmemh", P_0x7f9e3a70b890, v0x7f9e3a71c0c0, 32'sb00000000000000000000000000000000, 32'sb00000000000000000000000001111111 {0 0 0};
+    %vpi_call 3 11 "$display", "Read from file." {0 0 0};
+    %end;
+    .thread T_1;
+    .scope S_0x7f9e3a706f90;
+T_2 ;
+    %vpi_call 2 13 "$dumpfile", "wave.vcd" {0 0 0};
+    %vpi_call 2 14 "$dumpvars" {0 0 0};
+    %vpi_call 2 15 "$display", "begin tb." {0 0 0};
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v0x7f9e3a71c3c0_0, 0, 32;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v0x7f9e3a71c480_0, 0, 32;
+    %fork TD_tb_fetch.test, S_0x7f9e3a71c190;
+    %join;
+    %vpi_call 2 17 "$display", "test end tb." {0 0 0};
+    %vpi_call 2 18 "$finish" {0 0 0};
+    %end;
+    .thread T_2;
+    .scope S_0x7f9e3a706f90;
+T_3 ;
+    %delay 5, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x7f9e3a71c600_0, 0, 1;
+    %delay 5, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x7f9e3a71c600_0, 0, 1;
+    %jmp T_3;
+    .thread T_3;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "fetch_tb.v";
+    "fetch.v";
